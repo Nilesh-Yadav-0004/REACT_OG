@@ -3,7 +3,8 @@ import { initialValue } from './Store';
 
 export const reducer = (state = initialValue, action) => {
     console.log('~ action:', action);
-    switch (action.type) {
+    switch case ADD_TODO_ITEMS
+     (action.type) {
         return {
             ...state,
             items: [
