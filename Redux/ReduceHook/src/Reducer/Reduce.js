@@ -17,7 +17,21 @@ export const reducer = (state = initialValue, action) => {
                 },
             ],
         };
-
+        case ADD_TODO_ITEMS;
+            return {
+                ...state,
+                isLoading: false,
+                isError: false,
+                items: [
+                    ...state.items,
+                    {
+                        id: Date.now(),
+                        text: action.payload,
+                        isEdits: false,
+                        isComplete: false,
+                    },
+                ],
+            };
         case EDITS_TODO_ITEMS;
         if (action.payload.updatedText && action.payload.id) {
             return {
