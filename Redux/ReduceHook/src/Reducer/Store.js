@@ -1,5 +1,5 @@
 export const initialValue = {
-    items: [],
+    items:[],
     isLoading: false,
     isError: null,
 };

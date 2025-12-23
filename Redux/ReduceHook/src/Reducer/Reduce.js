@@ -1,65 +1,70 @@
-import { DELETE_TODO_ITEMS, ADD_TODO_ITEMS, EDITS_TODO_ITEMS} from './Action';
+import { ADD_TODO_ITEMS, EDITS_TODO_ITEMS, DELETE_TODO_ITEMS,  COMPLETE_TODO_ITEMS, LOADING_TODO_ITEMS, ERROR_TODO_ITEMS } from './Action';
 import { initialValue } from './Store';
 
-export const reducer = (state = initialValue, action) => {
-    console.log('~ action:', action);
-    switch case ADD_TODO_ITEMS
-     (action.type) {
-        return {
-            ...state,
-            items: [
-                ...state,
-                {
-                    id: DataTransfer.now(),
-                    Text: action.payload,
-                    isEdits: false,
-                    isComplete: false,
-                },
-            ],
-        };
-        case ADD_TODO_ITEMS;
+export const reducer = ( state = initialValue, action) =>{
+    switch (action.type){
+        case LOADING_TODO_ITEMS:
+            return {...state, isLoading: true};
+
+        case ERROR_TODO_ITEMS:
+            return{...state, isLoading: false, isError:true};
+
+        case ADD_TODO_ITEMS:
             return {
                 ...state,
                 isLoading: false,
                 isError: false,
-                items: [
+                items:[
                     ...state.items,
-                    {
-                        id: Date.now(),
-                        text: action.payload,
-                        isEdits: false,
-                        isComplete: false,
-                    },
-                ],
+                {
+                    id: Date.now(),
+                    text: action.payload,
+                    isEdits: false,
+                    isComplete: false,
+                },
+               ],
             };
-        case EDITS_TODO_ITEMS;
-        if (action.payload.updatedText && action.payload.id) {
-            return {
+
+        case EDITS_TODO_ITEMS: 
+          if (action.payload.updatedText && action.payload.id){
+            return{
                 ...state,
-                items: state.items.map((el)=>
-                el.id === action.payload.id 
-                ?{
+                 items: state.items.map((el) => 
+                    el.id === action.payload.id 
+                 ? {
                     ...el,
                     isEdits: !el.isEdits,
                     text: action.payload.updatedText,
-                }
-                : el
+                 }
+                 : el
                 ),
             };
-        } else {
+          }else {
             return {
                 ...state,
                 items: state.items.map((el) =>
-                el.id === action.payload ? { ...el, isEdits: !el.isEdits } : el
+                    el.id === action.payload ? {...el, isEdits: !el.isEdits} : el
                 ),
-           };
-        }
-
-        case DELETE_TODO_ITEMS:
-            return {
-                ...state,
-                items: state.items.filter((el) => el.id === action.payload),
             };
+          }
+            
+        case DELETE_TODO_ITEMS:
+            return{
+                ...state,
+                items: state.items.filter((el) => el.id != action.payload),
+            };
+
+
+            case COMPLETE_TODO_ITEMS:
+                return {
+                    ...state,
+                    items: state.items.map((el) =>
+                    el.id === action.payload
+                        ? { ...el, isComplete: !el.isComplete }
+                        : el
+                    ),
+                };
+
 
             default:
                 return state;
