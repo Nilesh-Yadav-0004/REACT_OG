@@ -1,42 +1,41 @@
-import React from 'react';
-
-import { reducer } from '../Reducer/Reduce';
-import { initialValue } from '../Reducer/Store';
-import { ADD_TODO_ITEMS, ERROR_TODO_ITEMS, LOADING_TODO_ITEMS } from '../Reducer/Action';
-import { TodoList } from './TodoList';
+import React from "react";
+import { TodoList } from "./TodoList";
 
 export const TodoInput = () => {
-    const todoText = React.useRef(null);
-    const [ state,dispatch ] = React.useReducer(reducer, initialValue);
-    console.log('🚀 ~ state:', state);
+  const [todoText, setTodoText] = React.useState("");
+  const [todoData, setTodoData] = React.useState([]);
 
-    const handleAddTodo = () =>{
-        const value = todoText.current.value;
-        if (value === '') {
-            dispatch({ type: ERROR_TODO_ITEMS});
-            return;
-        }
-
-        dispatch({ type: LOADING_TODO_ITEMS});
-
-        setTimeout(() =>{
-             dispatch({ type: ADD_TODO_ITEMS, payload: value });
-        },1000);
-        todoText.current.value= '';
+  const handleTodos = () => {
+    if (todoText.trim() === "") {
+      return;
+    }
+    const todoInfo = {
+      id: Date.now(),
+      text: todoText,
+      isEdits: false,
+      isComplete: false,
     };
+    setTodoData((prev) => [...prev, todoInfo]);
+    setTodoText("");
+  };
+  
+  return (
+    <>
+      <h1>todosInput</h1>
 
-    if (state.isLoading) return <h1>Loading...</h1>;
+   
+      <input
+        value={todoText}
+        type="text"
+        placeholder="enter the task...."
+        onChange={(e) => setTodoText(e.target.value)}
+      />
 
-     return(
-        <>
-        <input ref={todoText} type='text' placeholder='Enter Your Task!!!'/>
-        <button onClick={handleAddTodo}>Add</button>
-        {state.isError ? (
-            <h1>Something Went Wrong...</h1>
-        ):(
-        <TodoList value= {{ state,dispatch }}/>
-        )}
-        {/* <TodoList value= {{ state,dispatch }}/> */}
-        </>
-     );
+      <button onClick={handleTodos}>Add</button>     
+    
+
+      <TodoList props={{ todoData, setTodoData }} />
+    
+    </>
+  );
 };

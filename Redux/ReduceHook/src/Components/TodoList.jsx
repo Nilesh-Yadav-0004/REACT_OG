@@ -1,96 +1,80 @@
-import React from 'react';
+import React from "react";
 
-import * as type from '../Reducer/Action';
- 
-export const TodoList = ({ value }) =>{
-    const editValue = React.useRef(null);
-    const { state, dispatch } = value;
+export const TodoList = ({ props }) => {
+  const { todoData, setTodoData } = props;
 
-    const handleClickDelete = (id) =>{
-        dispatch({ type: type.DELETE_TODO_ITEMS, payload: id});
-    };
+  const [editValue, setEditsValue] = React.useState("");
+  const [editValueID, setEditsValueID] = React.useState("");
 
-    const handleClickEdit = (id) =>{
-         dispatch({ type: type.EDITS_TODO_ITEMS, payload: id});
-    };
+  const handleDelete = (id) => {
+    if (!id) return;
+    const filterArr = todoData.filter((el) => el.id !== id);
+    setTodoData(filterArr);
+  };
 
-    const handleClickConfirm = (id) => {
-        const editText = editValue.current.value.trim();
-        dispatch({type: type.EDITS_TODO_ITEMS, payload: { updatedText: editText, id: id}});
-    };
- 
-    const handleClickCancel = (id) =>{
-        dispatch({ type: type.EDITS_TODO_ITEMS, payload: id});
-    };
-    
-    const handleComplete = (id) => {
-    dispatch({ type: type.COMPLETE_TODO_ITEMS, payload: id });
-    };
-
-
-
-
-
-    return(
-        <>
-        {state.items && state.items.map((el) =>{
-            return(
-                <ul
-                 key = {el.id}
-                 style = {{
-                    display: 'flex',
-                    justifyContent: 'space-around',
-                    alignItems: 'center',
-                    listStyle: 'none'
-                 }} 
-                >
-                    <input
-                        type="checkbox"
-                        checked={el.isComplete}
-                        onChange={() => handleComplete(el.id)}
-                    />
-                    {/* <li>{el.id}</li> */}
-                    <li
-                    style={{
-                        textDecoration: el.isComplete ? 'line-through' : 'none',
-                        color: el.isComplete ? 'gray' : 'black',
-                    }}
-                    >
-                    {el.id}
-                    </li>
-
-
-                    {el.isEdits ? (
-                     <input ref={editValue} defaultValue={el.text} type="text"/>   
-                    ) :(
-                        <li>{el.text}</li>
-                    )}
-                    <div style={{ display: 'flex', gap: '10px'}}>
-                        { el.isEdits? (
-                            <>
-                            <button 
-                            style= {{
-                                background: 'yellowgreen'
-                            }}
-                            onClick={() => handleClickConfirm(el.id)}
-                            >
-                            Confirm
-                            </button>
-                            <button style={{background: '#dc143c'}} onClick={() => handleClickCancel(el.id)}>
-                                Cancel
-                            </button>
-                            </>
-                        ): (
-                            <>
-                            <button style={{background: 'yellowgreen'}} onClick={()=> handleClickEdit(el.id)}>Edit</button>
-                            <button style={{background: '#dc143c'}} onClick={() => handleClickDelete(el.id)}>Delete</button>
-                            </>
-                        ) }
-                    </div>
-                </ul>
-            );
-        })}
-        </>
+  const handleEdits = (id) => {
+    if (!id) return;
+    setEditsValueID(id);
+    const editArr = todoData.map((el) =>
+      el.id === id ? { ...el, isEdits: !el.isEdits } : el
     );
+    setTodoData(editArr);
+  };
 
+  const handleCancel = (id) => {
+    if (!id) return;
+    const cancelEditsArr = todoData.map((el) =>
+      el.id === id ? { ...el, isEdits: !el.isEdits } : el
+    );
+    setTodoData(cancelEditsArr);
+  };
+
+  const handleConfirm = () => {
+    if (!editValueID && editValue.trim() === " ") return;
+    const confirmEditsArr = todoData.map((el) =>
+      el.id === editValueID
+        ? { ...el, text: editValue, isEdits: !el.isEdits }
+        : el
+    );
+    setTodoData(confirmEditsArr);
+  };
+  return (
+    <>
+      <h1>todo List</h1>
+      {todoData?.map((el) => (
+        <div
+          key={el.id}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "20px",
+          }}
+        >
+          <input type="checkbox" name="complete" id="complete" />
+          {el.isEdits ? (
+            <input
+              type="text"
+              defaultValue={el.text}
+              onChange={(e) => setEditsValue(e.target.value)}
+            />
+          ) : (
+            <h3>{el.text}</h3>
+          )}
+          {el.isEdits ? (
+            <>
+              <button onClick={() => handleCancel(el.id)}>cancel</button>
+              <button onClick={handleConfirm}>confirm</button>
+            </>
+          ) : (
+            <>
+              <button onClick={() => handleEdits(el.id)}>edit</button>
+              <button onClick={() => handleDelete(el.id)}>delete</button>
+              
+            </>
+          )}
+        </div>
+      ))}
+    </>
+  );
 };
