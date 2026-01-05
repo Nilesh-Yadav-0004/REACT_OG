@@ -13,6 +13,7 @@ export const Counter = () => {
         <h1>Counter {getState().count}</h1>
         <button onClick={() => dispatchEvent({ type: types.INCREMENT })}>increment</button>
         <button onClick={() => dispatchEvent({ type: types.DECREMENT })}>decrement</button>
+        <button onClick={() => dispatchEvent({ type: types.DOUBLE })}>double</button>1
         </>
     );
 };

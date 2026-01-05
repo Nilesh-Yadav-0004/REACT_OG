@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import {Countcer} from './Components/Counter'
+import {Counter} from './Components/Counter'
 import './App.css'
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       
-        <Countcer/>
+        <Counter/>
     </>
   )
 }
