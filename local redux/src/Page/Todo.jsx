@@ -1,16 +1,12 @@
-import React from 'react'
-import { TodosInput } from '../Components/TodosInput'
-import { TodoList } from '../Components/TodoList'
-import TodoLogin from '../Components/TodoLogin';
+import React from 'react';
+import { TodoInput } from '../Components/TodoInput';
+import {TodoList} from '../Components/TodoList';
 
 export const Todo = () => {
   return (
     <>
-      <TodoLogin/>
-      <TodosInput/>
-      <TodoList/>
+      <TodoInput />
+      <TodoList />
     </>
   );
 };
-
-

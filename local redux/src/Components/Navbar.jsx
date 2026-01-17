@@ -1,13 +1,31 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 
 export const Navbar = () => {
-    const routes = [
-        { path: '/', element: 'home' },
-        { path: '/login', element: 'login' },
-        { path: '/signup', element: 'signup' },
-        { path: '/counter', element: 'counter' },
-        { path: '/todo', element: 'todo' },
-    ];
+  const routes = [
+    { path: '/', element: 'Home' },
+    { path: '/Login', element: 'Login' },
+    { path: '/Signup', element: 'Signup' },
+    { path: '/Counter', element: 'Counter' },
+    { path: '/todo', element: 'Todo' }
+  ];
 
-    return <></>;
+  return (
+    <>
+      {routes.map((el, i) => (
+        <NavLink
+          to={el.path}
+          key={i}
+          style={{
+            display: 'inline-flex',
+            justifyContent: 'space-evenly',
+            alignItems: 'center',
+            width: '100px',
+            margin: '20px',
+          }}
+        >
+          {el.element}
+        </NavLink>
+      ))}
+    </>
+  );
 };
