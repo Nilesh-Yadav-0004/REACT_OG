@@ -17,11 +17,15 @@ export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESSFULL = 'LOGIN_SUCCESSFULL';
 
 const getLogin = () => {
-    return { type: LOGIN_SUCCESSFULL, payload: payload };
+    return { type: REMOVE_TOKEN };
 };
 
 const loginFailure = (payload) => {
     return { type: LOGIN_FAILURE, payload: payload};
-};
+};  
 
-export { getLogin, LOGIN_SUCCESSFULL, loginFailure };
+const loginSuccessfull = (payload) => {
+    return { type: LOGIN_SUCCESSFULL, payload: payload}
+}
+
+export { getLogin, loginSuccessfull, loginFailure };
