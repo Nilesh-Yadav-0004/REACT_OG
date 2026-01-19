@@ -23,7 +23,7 @@ export const LoginPage = () => {
     
     return (
         <>
-        <Login props={handleLogin}/>
+        <LoginCompo props={handleLogin}/>
         {isError && <h1>Something went wrong....🤦‍♂️</h1>}
         </>
     );
