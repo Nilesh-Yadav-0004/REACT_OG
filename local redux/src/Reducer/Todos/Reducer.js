@@ -31,7 +31,7 @@ export const todoReducer = (state = initialValue, { type, payload }) => {
         };
       }
 
-      case types.EDITSTODOS: {
+      case types.EDITTODOS: {
         return {
           ...state,
           todo: state.todo.map((el) => 

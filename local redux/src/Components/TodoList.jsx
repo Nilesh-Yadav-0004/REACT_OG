@@ -18,7 +18,7 @@ export const TodoList = () => {
     console.log('🚀 ~ TodoList.jsx ~ token:', token);
 
     const handleEdit = (id) => {
-      dispatch({ type: types.EDITSTODOS, payload: id });
+      dispatch({ type: types.EDITTODOS, payload: id });
     };
 
     const handleDelete = (id) => {
@@ -27,14 +27,14 @@ export const TodoList = () => {
 
     const handleConfirm = (id, text) => {
       dispatch({
-        type: types.CONFIRMTODOS,
+        type: types.CONFIRMTODODS,
         payload: { id, text },
       });
     };
 
     const handleCancel = (id) => {
       dispatch({
-        type: types.CANCELTODOS,
+        type: types.CANCELTODODS,
         payload: id
       });
     };
