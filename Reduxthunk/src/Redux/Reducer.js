@@ -1,4 +1,4 @@
-import * as type from './ActionType';
+import * as types from './ActionType';
 
 const initialState = {
     todos: [],
@@ -7,10 +7,10 @@ const initialState = {
 };
 
 export const todoReducer = (oldState = initialState, action) =>{
-    const { types, payload } = action;
+    const { type, payload } = action;
 
-    switch (types) {
-        case type.GET_TODOS_REQUEST:
+    switch (type) {
+        case types.GET_TODOS_REQUEST:
             return{
                 ...oldState,
                 isLoading: true,
@@ -20,7 +20,7 @@ export const todoReducer = (oldState = initialState, action) =>{
                 return{
                     ...oldState,
                     isLoading: false,
-                    isError: payload,
+                   todos: [...oldState.todos, payload],
                 };
 
                 case types.GET_TODOS_FAILURE:

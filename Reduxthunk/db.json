@@ -5,11 +5,5 @@
             "title": "learn_redux",
             "status": false
         }
-    ],
-
-    "cart": [
-        {
-            "count": 0
-        }
     ]
 }
