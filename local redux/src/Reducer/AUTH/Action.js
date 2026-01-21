@@ -21,11 +21,11 @@ const getLogin = () => {
 };
 
 const loginFailure = (payload) => {
-    return { type: LOGIN_FAILURE, payload: payload};
+    dispatch({ type: LOGIN_FAILURE, payload: payload});
 };  
 
-const loginSuccessfull = (payload) => {
-    return { type: LOGIN_SUCCESSFULL, payload: payload}
+const loginSuccessfull = (payload) => (dispatch) =>{
+    dispatch ({ type: LOGIN_SUCCESSFULL, payload: payload});
 }
 
 export { getLogin, loginSuccessfull, loginFailure };
