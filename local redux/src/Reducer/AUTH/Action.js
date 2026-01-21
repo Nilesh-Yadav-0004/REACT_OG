@@ -21,7 +21,7 @@ const getLogin = () => {
 };
 
 const loginFailure = (payload) => {
-    dispatch({ type: LOGIN_FAILURE, payload: payload});
+    dispatch ({ type: LOGIN_FAILURE, payload: payload});
 };  
 
 const loginSuccessfull = (payload) => (dispatch) =>{
