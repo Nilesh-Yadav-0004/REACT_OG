@@ -30,6 +30,24 @@ export const todoReducer = (oldState = initialState, action) =>{
                     isError: payload,
                 };
 
+                case types.ADD_TODOS_REQUEST:
+                    return {
+                        ...oldState,
+                        isLoading: false,
+                    };
+
+                case types.ADD_TODOS_SUCCESS:
+                    return {
+                        ...oldState,
+                        isLoading: false,
+                    };
+
+                case types.ADD_TODOS_FAILURE:
+                    return {
+                        ...oldState,
+                        isLoading: false,
+                    };
+
                 default:
                     return oldState;
     }
