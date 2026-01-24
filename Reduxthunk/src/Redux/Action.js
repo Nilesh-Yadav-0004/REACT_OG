@@ -1,3 +1,4 @@
+import axios from 'axios';
 import * as types from '../Redux/ActionType';
 
 const getTodoTRequest = (payload) => {
@@ -12,6 +13,12 @@ const GET_TODOS_SUCCESS = (payload) => {
     return { type: types.GET_TODOS_SUCCESS, payload };
 };
 
+const getApi = (dispatch) => {
+    dispatch(types.GET_TODOS_REQUEST);
+    axios
+        .get('http://localhost:8080/todo')
+        .then((res) => dispatch())
+}
 const ADDTodoTRequest = (payload) => {
     return { type: types.ADD_TODOS_SUCCESS, payload };
 };
