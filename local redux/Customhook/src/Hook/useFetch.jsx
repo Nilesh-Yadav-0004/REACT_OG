@@ -1,5 +1,7 @@
 // here we are create the action
 
+import { useEffect, useReducer } from "react";
+
 const FETCH_REQUEST = 'FETCH_REQUEST';
 const FETCH_SUCCESS = 'FETCH_SUCCESS';
 const FETCH_FAILURE = 'FETCH_FAILURE';
@@ -38,4 +40,19 @@ const Reducer = (oldState = initialValue, { type, payload }) => {
             default:
                 return oldState;
         }
+};
+
+export const useFetch = (url) => {
+    const [state, dispatch] = useReducer(Reducer, initialValue);
+
+    useEffect(() =>{
+        dispatch({ type: FETCH_REQUEST });
+
+        fetch(url)
+            .then((res) => res.json())
+            .then((res) => dispatch({ type: FETCH_SUCCESS, payload: res }))
+            .catch(() => dispatch({ type: FETCH_FAILURE }));
+    }, []);
+
+    return state;
 };

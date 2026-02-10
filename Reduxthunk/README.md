@@ -16,7 +16,6 @@ cli :- `npm i axios json-server redux react-redux`
     - actiontypes.js
     - action.js
     - reducer.js
-    - store.js
-
+ 
 3. pages
     - HomePages.jsx
