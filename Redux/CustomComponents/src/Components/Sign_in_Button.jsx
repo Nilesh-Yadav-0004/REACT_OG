@@ -17,3 +17,8 @@ export const Sign_in_Buttom = ({ value }) => {
         </>
     );
 };
+
+/* Definition for Custom Hook and Custom Components */
+
+// In React, Custom Components are the building blocks of your UI, while Custom Hooks are the logic engines that power them. 
+// Think of a component as the "body" and a hook as the "brain."
