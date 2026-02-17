@@ -12,7 +12,11 @@ export const App = () => {
 
   return (
     <>
-      <InputBox length={4} style={style} />
+      {/* <InputBox length={4} style={style} /> */}
+      <InputBox setMainVal={(v) => setValue(v)} perBox={1} length={4}
+      style={style} />
+      <h1>{value}</h1>
     </>
   )
 }
+
