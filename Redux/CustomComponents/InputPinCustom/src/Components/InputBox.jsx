@@ -32,4 +32,3 @@ Inputbox.defaultProps = {
     label: "hello"
 }
 
-// ..
