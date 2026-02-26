@@ -31,3 +31,5 @@ Inputbox.PropTypes ={
 Inputbox.defaultProps = {
     label: "hello"
 }
+
+// ..
