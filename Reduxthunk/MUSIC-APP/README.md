@@ -8,3 +8,11 @@
     - style-components 'npm install styled-components'
     - json-server 'npm i json-server@0.17.2'
     - axios 'npm i axios'
+
+2. what we have to cover here 
+
+
+    - optimise the app
+    - custom components
+    - custom hook
+    - browser route
