@@ -12,7 +12,7 @@
 2. what we have to cover here 
 
 
-    - optimise the app
-    - custom components
-    - custom hook
-    - browser route
+    - optimise the app.
+    - custom components.
+    - custom hook.
+    - browser route.
