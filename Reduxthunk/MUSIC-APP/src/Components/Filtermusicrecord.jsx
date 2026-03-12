@@ -13,7 +13,8 @@ export const FilterMusicRecords = () => {
 
     const newArr = [...filterVal];
 
-    if (newArr.splice(new))
+    if (newArr.splice(newArr.indexOf(option), 1);
+  )
   }
   return (
     <>
