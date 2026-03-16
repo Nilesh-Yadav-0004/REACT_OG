@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { FilterMusicRecords } from "../Components/FilterMusicRecords";
-import { MusicAlbum } from "../Components/MusicAlbum";
+import { musicalbum } from "../Components/musicalbum";
 import { useSelector } from "react-redux";
 
 export const MusicRecord = () => {
