@@ -1,33 +1,34 @@
-import axios from "axios";
-
 import * as types from "./Action";
 
-const getMusicRequest = () => {
-  return {
-    type: types.GET_MUSIC_REQUEST,
-  };
+const initialVal = {
+  musicRecords: [],
+  isLoading: false,
+  isError: false,
 };
 
-const getMusicSuccess = (payload) => {
-  return {
-    type: types.GET_MUSIC_SUCCESS,
-    payload,
-  };
-};
+export const reducer = (oldState = initialVal, { type, payload }) => {
+  switch (type) {
+    case types.GET_MUSIC_REQUEST:
+      return {
+        ...oldState,
+        isLoading: true,
+      };
 
-const getMusicFailure = (payload) => {
-  return {
-    type: types.GET_MUSIC_FAILURE,
-    payload,
-  };
-};
+    case types.GET_MUSIC_SUCCESS:
+      return {
+        ...oldState,
+        isLoading: false,
+        musicRecords: payload,
+      };
 
-export const getMusicRecords = (dispatch) => {
-  dispatch(getMusicRequest());
-  axios
-    .get("http://localhost:8080/albums")
-    .then((res) => {
-      dispatch(getMusicSuccess(res.data));
-    })
-    .catch((err) => dispatch(getMusicFailure(err)));
+    case types.GET_MUSIC_FAILURE:
+      return {
+        ...oldState,
+        isLoading: false,
+        isError: { msg: true, remark: payload },
+      };
+
+    default:
+      return oldState;
+  }
 };
