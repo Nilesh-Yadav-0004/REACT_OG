@@ -1,16 +1,31 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 
 import { getMusicRecords } from "../Redux/actionTypes";
 
 export const MusicAlbum = () => {
   const dispatch = useDispatch();
+
   const musicData = useSelector((store) => store.musicRecords);
-  console.log("Music Data: ", musicData);
+
+  const [searchParams] = useSearchParams();
+
+  // console.log("Music Data: ", musicData);
 
   useEffect(() => {
-    dispatch(getMusicRecords);
-  }, []);
+    const genre = searchParams.getAll("genre");
+
+    const queryParams = {
+      params: {
+        genre: genre,
+        _sort: searchParams.get("_sort") && "year",
+        _order: searchParams.get("_sort"),
+      },
+    };
+
+    dispatch(getMusicRecords(queryParams));
+  }, [searchParams]);
 
   return (
     <>
@@ -21,6 +36,7 @@ export const MusicAlbum = () => {
               <h3>{album.id}</h3>
               <h4>{album.name}</h4>
               <h3>{album.genre}</h3>
+              <h4>{album.year}</h4>
               <img src={album.img} alt={album.name} />
             </div>
           );
