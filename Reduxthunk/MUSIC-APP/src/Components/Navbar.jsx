@@ -3,7 +3,7 @@ import "../App.css";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 
-import { removeToken } from "../Redux/Auth/actionType";
+import { removeToken } from "../Redux/Auth/ActionType";
 
 export const Navbar = () => {
   const dispatch = useDispatch();
