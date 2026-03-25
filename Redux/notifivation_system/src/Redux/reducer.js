@@ -8,6 +8,9 @@ export const Reducer = (state = initialValue, {type, payload}) => {
         return [...state, payload];
 
     case types.REMOVE_NOTIFICATION:
-        return state.filter((el)=> el.id === payload)
+        return state.filter((el)=> el.id === payload.id);
+
+    default:
+        return state;
  }
-}
+};
