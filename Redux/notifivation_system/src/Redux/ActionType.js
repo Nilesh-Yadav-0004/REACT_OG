@@ -1,1 +1,1 @@
-export const addNotify = (payload)
+export const addNotify = (payload);
