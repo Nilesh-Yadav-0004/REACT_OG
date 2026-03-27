@@ -4,4 +4,4 @@ import { Reducer as notificationReducer } from './reducer';
 
 const root = combineReducers({notification: notificationReducer,});
 
-export const myStore = legacy_createStore(root, applyMiddleware(thunk));
+export const myStore = legacy_createStore(root, applyMiddleware(thunk));;
